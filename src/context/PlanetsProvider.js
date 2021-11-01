@@ -5,6 +5,13 @@ import PlanetsAPI from '../services/PlanetsAPI';
 
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
+  const [filter, setFilter] = useState({
+    filters: {
+      filterByName: {
+        name: '',
+      },
+    },
+  });
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -14,15 +21,21 @@ function PlanetsProvider({ children }) {
     fetchAPI();
   }, []);
 
+  const value = {
+    data,
+    filter,
+    setFilter,
+  };
+
   return (
-    <PlanetsContext.Provider value={ data }>
+    <PlanetsContext.Provider value={ value }>
       {children}
     </PlanetsContext.Provider>
   );
 }
 
 PlanetsProvider.propTypes = {
-  children: PropTypes.shape(PropTypes.shape).isRequired,
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default PlanetsProvider;
