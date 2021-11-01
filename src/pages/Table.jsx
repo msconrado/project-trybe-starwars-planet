@@ -5,14 +5,6 @@ function Table() {
   const { data: { results }, filter: { filters } } = useContext(PlanetsContext);
   const { filterByName: { name } } = filters;
 
-  // const filterInput = () => {
-  //   headerTable.filter((filter) => filter.name.toLowerCase().includes(name.toLowerCase())).map((planet) => {
-  //     <tr key={ planet.name }>
-  //       {Object.values(planet).map((value) => <td key={ value }>{value}</td>)}
-  //     </tr>;
-  //   });
-  // };
-
   if (results !== undefined) {
     const headerTable = results.filter((planet) => delete planet.residents);
 

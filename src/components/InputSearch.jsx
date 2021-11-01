@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function InputSearch() {
-  const { setFilter } = useContext(PlanetsContext);
+  const { filter, setFilter } = useContext(PlanetsContext);
 
   const handleChange = ({ target }) => {
     const { value } = target;
     setFilter({
+      ...filter,
       filters: {
         filterByName: {
           name: value,
@@ -22,6 +23,7 @@ function InputSearch() {
         type="text"
         name="name"
         id="name"
+        placeholder="Filtrar por nome"
         onChange={ handleChange }
       />
     </form>
