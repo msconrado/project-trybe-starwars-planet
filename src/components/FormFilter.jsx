@@ -3,7 +3,7 @@ import PlanetsContext from '../context/PlanetsContext';
 
 function FormFilter() {
   const { filter, setFilter, setData, data, options, setOptions, change, setChange,
-  } = useContext(PlanetsContext);
+    setSavingResult, savingResult } = useContext(PlanetsContext);
   const { filterByNumericValues: filterValues } = filter;
 
   const handleChange = ({ target }) => {
@@ -18,7 +18,7 @@ function FormFilter() {
     const { results } = data;
     const { column, comparison, value } = change;
 
-    const filterValue = results.filter((planet) => {
+    const filterComp = results.filter((planet) => {
       switch (comparison) {
       case 'maior que':
         return Number(planet[column]) > Number(value);
@@ -29,9 +29,22 @@ function FormFilter() {
       }
     });
 
+    const saveResult = results.filter((planet) => {
+      switch (comparison) {
+      case 'maior que':
+        return Number(planet[column]) <= Number(value);
+      case 'menor que':
+        return Number(planet[column]) >= Number(value);
+      default:
+        return planet[column] !== value;
+      }
+    });
+
+    setSavingResult({ ...savingResult, [change.column]: saveResult });
+
     setData({
       ...data,
-      results: filterValue,
+      results: filterComp,
     });
 
     const optionColumn = options.filter((op) => op !== change.column);

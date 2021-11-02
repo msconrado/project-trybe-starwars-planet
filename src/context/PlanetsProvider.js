@@ -6,6 +6,8 @@ import PlanetsAPI from '../services/PlanetsAPI';
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
 
+  const [savingResult, setSavingResult] = useState([]);
+
   const [options, setOptions] = useState([
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
   ]);
@@ -42,6 +44,8 @@ function PlanetsProvider({ children }) {
     setOptions,
     change,
     setChange,
+    savingResult,
+    setSavingResult,
   };
 
   return (
