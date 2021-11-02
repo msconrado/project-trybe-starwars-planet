@@ -2,25 +2,22 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function FormFilter() {
-  const { filter, setFilter, setData, data } = useContext(PlanetsContext);
+  const { filter, setFilter, setData, data, options, setOptions, change, setChange,
+  } = useContext(PlanetsContext);
   const { filterByNumericValues: filterValues } = filter;
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    setFilter({
-      ...filter,
-      filterByNumericValues: [
-        {
-          ...filterValues[0],
-          [name]: value,
-        },
-      ],
+    setChange({
+      ...change,
+      [name]: value,
     });
   };
 
   const handleClick = async () => {
     const { results } = data;
-    const { column, comparison, value } = filterValues[0];
+    const { column, comparison, value } = change;
+
     const filterValue = results.filter((planet) => {
       switch (comparison) {
       case 'maior que':
@@ -31,9 +28,27 @@ function FormFilter() {
         return planet[column] === value;
       }
     });
+
     setData({
       ...data,
       results: filterValue,
+    });
+
+    const optionColumn = options.filter((op) => op !== change.column);
+    setOptions(optionColumn);
+
+    setFilter({
+      ...filter,
+      filterByNumericValues: [
+        ...filterValues,
+        change,
+      ],
+    });
+
+    setChange({
+      column: optionColumn[0],
+      comparison: 'maior que',
+      value: 0,
     });
   };
 
@@ -45,11 +60,7 @@ function FormFilter() {
         id="column"
         onChange={ handleChange }
       >
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        {options.map((col) => <option key={ col }>{col}</option>)}
       </select>
       <select
         data-testid="comparison-filter"

@@ -5,38 +5,38 @@ function Table() {
   const { data: { results }, filter: { filters } } = useContext(PlanetsContext);
   const { filterByName: { name } } = filters;
 
-  if (results !== undefined) {
-    const headerTable = results.filter((planet) => delete planet.residents);
+  if (results === undefined) return <p>Carregando...</p>;
+  if (results.length === 0) return <p>No Planet found</p>;
 
-    return (
-      <table>
-        <thead>
-          <tr>
-            { Object.keys(headerTable[0]).map((header) => (
-              <th key={ header }>{header.split('_').join(' ')}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {
-            name.length === 0
-              ? headerTable.map((planet) => (
+  const headerTable = results.filter((planet) => delete planet.residents);
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          { Object.keys(headerTable[0]).map((header) => (
+            <th key={ header }>{header.split('_').join(' ')}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {
+          name.length === 0
+            ? headerTable.map((planet) => (
+              <tr key={ planet.name }>
+                {Object.values(planet).map((value) => <td key={ value }>{value}</td>)}
+              </tr>
+            )) : headerTable
+              .filter((input) => input.name.toLowerCase().includes(name.toLowerCase()))
+              .map((planet) => (
                 <tr key={ planet.name }>
                   {Object.values(planet).map((value) => <td key={ value }>{value}</td>)}
                 </tr>
-              )) : headerTable
-                .filter((input) => input.name.toLowerCase().includes(name.toLowerCase()))
-                .map((planet) => (
-                  <tr key={ planet.name }>
-                    {Object.values(planet).map((value) => <td key={ value }>{value}</td>)}
-                  </tr>
-                ))
-          }
-        </tbody>
-      </table>
-    );
-  }
-  return <p>Carregando...</p>;
+              ))
+        }
+      </tbody>
+    </table>
+  );
 }
 
 export default Table;
