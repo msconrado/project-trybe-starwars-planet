@@ -1,9 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function FormFilter() {
-  const { filter, setFilter, setData, data, options, setOptions, change, setChange,
-    setSavingResult, savingResult } = useContext(PlanetsContext);
+  const [change, setChange] = useState({
+    column: 'population',
+    comparison: 'maior que',
+    value: 0,
+  });
+
+  const { filter, setFilter, setData, data, options, setOptions, notUsed,
+    setNotUsed } = useContext(PlanetsContext);
+
   const { filterByNumericValues: filterValues } = filter;
 
   const handleChange = ({ target }) => {
@@ -40,7 +47,7 @@ function FormFilter() {
       }
     });
 
-    setSavingResult({ ...savingResult, [change.column]: saveResult });
+    setNotUsed({ ...notUsed, [change.column]: saveResult });
 
     setData({
       ...data,

@@ -4,14 +4,16 @@ import Table from './pages/Table';
 import PlanetsProvider from './context/PlanetsProvider';
 import InputSearch from './components/InputSearch';
 import FormFilter from './components/FormFilter';
-import NameFilters from './components/NameFilters';
+import FiltersName from './components/FiltersName';
+import SelectOrder from './components/SelectOrder';
 
 function App() {
   return (
     <PlanetsProvider>
       <InputSearch />
       <FormFilter />
-      <NameFilters />
+      <SelectOrder />
+      <FiltersName />
       <Table />
     </PlanetsProvider>
   );

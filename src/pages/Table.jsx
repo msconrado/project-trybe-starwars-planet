@@ -8,13 +8,11 @@ function Table() {
   if (results === undefined) return <p>Carregando...</p>;
   if (results.length === 0) return <p>No Planet found</p>;
 
-  const headerTable = results.filter((planet) => delete planet.residents);
-
   return (
     <table>
       <thead>
         <tr>
-          { Object.keys(headerTable[0]).map((header) => (
+          { Object.keys(results[0]).map((header) => (
             <th key={ header }>{header.split('_').join(' ')}</th>
           ))}
         </tr>
@@ -22,11 +20,16 @@ function Table() {
       <tbody>
         {
           name.length === 0
-            ? headerTable.map((planet) => (
+            ? results.map((planet) => (
               <tr key={ planet.name }>
-                {Object.values(planet).map((value) => <td key={ value }>{value}</td>)}
+                {Object.values(planet).map((value) => (
+                  planet.name === value
+                    ? <td data-testid="planet-name" key={ value }>{value}</td>
+                    : <td key={ value }>{value}</td>
+                ))}
               </tr>
-            )) : headerTable
+            ))
+            : results
               .filter((input) => input.name.toLowerCase().includes(name.toLowerCase()))
               .map((planet) => (
                 <tr key={ planet.name }>

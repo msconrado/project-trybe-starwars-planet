@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
-function NameFilters() {
-  const { data, setData, savingResult, filter, setFilter,
+function FiltersName() {
+  const { data, setData, notUsed, filter, setFilter,
     options, setOptions } = useContext(PlanetsContext);
+
   const { filterByNumericValues: filterNum } = filter;
 
   const handleClick = ({ target }) => {
     const { id } = target;
+
     setData({
       ...data,
-      results: data.results.concat(savingResult[id]),
+      results: data.results.concat(notUsed[id]),
     });
 
     setOptions(options.concat(id));
@@ -43,4 +45,4 @@ function NameFilters() {
   );
 }
 
-export default NameFilters;
+export default FiltersName;

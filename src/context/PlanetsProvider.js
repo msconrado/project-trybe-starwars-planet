@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PlanetsContext from './PlanetsContext';
 import PlanetsAPI from '../services/PlanetsAPI';
+import { FIRST, LAST } from '../global';
 
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
 
-  const [savingResult, setSavingResult] = useState([]);
+  const [notUsed, setNotUsed] = useState([]);
+
+  const [optSelect, setOptSelect] = useState([]);
 
   const [options, setOptions] = useState([
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
   ]);
-
-  const [change, setChange] = useState({
-    column: 'population',
-    comparison: 'maior que',
-    value: 0,
-  });
 
   const [filter, setFilter] = useState({
     filters: {
@@ -25,12 +22,18 @@ function PlanetsProvider({ children }) {
       },
     },
     filterByNumericValues: [],
+    order: {
+      column: 'name',
+      sort: 'ASC',
+    },
   });
 
   useEffect(() => {
     const fetchAPI = async () => {
       const response = await PlanetsAPI();
+      response.results.sort((a, b) => (a.name > b.name ? FIRST : LAST));
       setData(response);
+      setOptSelect(Object.keys(response.results[0]));
     };
     fetchAPI();
   }, []);
@@ -42,10 +45,10 @@ function PlanetsProvider({ children }) {
     setFilter,
     options,
     setOptions,
-    change,
-    setChange,
-    savingResult,
-    setSavingResult,
+    notUsed,
+    setNotUsed,
+    optSelect,
+    setOptSelect,
   };
 
   return (
