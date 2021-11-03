@@ -17,8 +17,9 @@ function InputSearch() {
   };
 
   return (
-    <form>
+    <form className="row d-flex justify-content-center pt-2">
       <input
+        className="form-control w-25 p-2"
         data-testid="name-filter"
         type="text"
         name="name"

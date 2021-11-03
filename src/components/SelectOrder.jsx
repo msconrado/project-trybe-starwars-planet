@@ -40,50 +40,72 @@ function SelectOrder() {
   };
 
   return (
-    <form>
-      <select
-        data-testid="column-sort"
-        name="column"
-        id="column"
-        onChange={ handleChange }
-      >
-        <option value="name">name</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="gravity">gravity</option>
-        <option value="surface_water">surface_water</option>
-        <option value="population">population</option>
-      </select>
-      <label htmlFor="asc">
-        Ascedente
-        <input
-          data-testid="column-sort-input-asc"
-          value="ASC"
-          type="radio"
-          name="sort"
-          id="asc"
+    <form className="row g-2 p-3">
+      <div className="col-auto">
+        <p className="col-form-label">Ordenar</p>
+      </div>
+      <div className="col-auto">
+        <select
+          className="form-select"
+          data-testid="column-sort"
+          name="column"
+          id="column"
           onChange={ handleChange }
-        />
-      </label>
-      <label htmlFor="desc">
-        Descendente
-        <input
-          data-testid="column-sort-input-desc"
-          value="DESC"
-          type="radio"
-          name="sort"
-          id="desc"
-          onChange={ handleChange }
-        />
-      </label>
-      <button
-        onClick={ handleClick }
-        data-testid="column-sort-button"
-        type="button"
+        >
+          <option value="name">name</option>
+          <option value="rotation_period">rotation_period</option>
+          <option value="orbital_period">orbital_period</option>
+          <option value="diameter">diameter</option>
+          <option value="gravity">gravity</option>
+          <option value="surface_water">surface_water</option>
+          <option value="population">population</option>
+        </select>
+      </div>
+      <div
+        style={ { padding: '7px 0px 0px 30px' } }
+        className="col-auto form-check form-check-inline"
       >
-        Ordenar
-      </button>
+        <label className="form-check-label" htmlFor="asc">
+          <input
+            className="form-check-input"
+            data-testid="column-sort-input-asc"
+            value="ASC"
+            type="radio"
+            name="sort"
+            id="asc"
+            onChange={ handleChange }
+            defaultChecked
+          />
+          Ascedente
+        </label>
+      </div>
+      <div
+        style={ { paddingTop: '7px' } }
+        className="col-auto form-check form-check-inline"
+      >
+        <label className="form-check-label" htmlFor="desc">
+          <input
+            className="form-check-input"
+            data-testid="column-sort-input-desc"
+            value="DESC"
+            type="radio"
+            name="sort"
+            id="desc"
+            onChange={ handleChange }
+          />
+          Descendente
+        </label>
+      </div>
+      <div className="col-auto">
+        <button
+          className="btn btn-primary"
+          onClick={ handleClick }
+          data-testid="column-sort-button"
+          type="button"
+        >
+          Ordenar
+        </button>
+      </div>
     </form>
   );
 }

@@ -10,9 +10,14 @@ import SelectOrder from './components/SelectOrder';
 function App() {
   return (
     <PlanetsProvider>
-      <InputSearch />
-      <FormFilter />
-      <SelectOrder />
+      <header className="container p-5">
+        <h2 className="text-center">Project Star Wars</h2>
+        <InputSearch />
+      </header>
+      <main>
+        <FormFilter />
+        <SelectOrder />
+      </main>
       <FiltersName />
       <Table />
     </PlanetsProvider>

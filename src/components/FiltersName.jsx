@@ -25,20 +25,28 @@ function FiltersName() {
   };
 
   return (
-    <div>
+    <div className="bg-dark" style={ { width: '20em' } }>
       {filterNum.map(({ column, comparison, value }, index) => (
-        <div data-testid="filter" key={ index }>
-          <p>
+        <div
+          className="btn-toolbar justify-content-between mt-3"
+          data-testid="filter"
+          key={ index }
+        >
+          <p className="text-white">
             {column}
             {' '}
             {comparison}
             {' '}
             {value}
             {' '}
-            <button id={ column } onClick={ handleClick } type="button">
-              X
-            </button>
           </p>
+          <button
+            className="btn-close btn-close-white"
+            id={ column }
+            onClick={ handleClick }
+            type="button"
+            aria-label="x"
+          />
         </div>
       ))}
     </div>

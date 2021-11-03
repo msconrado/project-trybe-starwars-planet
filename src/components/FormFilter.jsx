@@ -73,39 +73,53 @@ function FormFilter() {
   };
 
   return (
-    <form>
-      <select
-        data-testid="column-filter"
-        name="column"
-        id="column"
-        onChange={ handleChange }
-      >
-        {options.map((col) => <option key={ col }>{col}</option>)}
-      </select>
-      <select
-        data-testid="comparison-filter"
-        name="comparison"
-        id="comparison"
-        onChange={ handleChange }
-      >
-        <option value="maior que">maior que</option>
-        <option value="menor que">menor que</option>
-        <option value="igual a">igual a</option>
-      </select>
-      <input
-        data-testid="value-filter"
-        type="number"
-        name="value"
-        id="value"
-        onChange={ handleChange }
-      />
-      <button
-        data-testid="button-filter"
-        type="button"
-        onClick={ handleClick }
-      >
-        Filtrar
-      </button>
+    <form className="row g-2 p-3">
+      <div className="col-auto">
+        <select
+          className="form-select"
+          data-testid="column-filter"
+          name="column"
+          id="column"
+          onChange={ handleChange }
+        >
+          {options.map((col) => <option key={ col }>{col}</option>)}
+        </select>
+      </div>
+      <div className="col-auto">
+        <select
+          className="form-select"
+          data-testid="comparison-filter"
+          name="comparison"
+          id="comparison"
+          onChange={ handleChange }
+        >
+          <option value="maior que">maior que</option>
+          <option value="menor que">menor que</option>
+          <option value="igual a">igual a</option>
+        </select>
+      </div>
+      <div className="col-auto">
+        <input
+          style={ { width: '10em' } }
+          className="form-control"
+          data-testid="value-filter"
+          type="number"
+          name="value"
+          id="value"
+          value={ change.value }
+          onChange={ handleChange }
+        />
+      </div>
+      <div className="col-auto">
+        <button
+          className="btn btn-primary"
+          data-testid="button-filter"
+          type="button"
+          onClick={ handleClick }
+        >
+          Filtrar
+        </button>
+      </div>
     </form>
   );
 }
