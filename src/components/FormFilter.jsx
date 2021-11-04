@@ -37,13 +37,14 @@ function FormFilter() {
     });
 
     const saveResult = results.filter((planet) => {
+      const valueColumn = planet[column] === 'unknown' ? 0 : planet[column];
       switch (comparison) {
       case 'maior que':
-        return Number(planet[column]) <= Number(value);
+        return Number(valueColumn) <= Number(value);
       case 'menor que':
-        return Number(planet[column]) >= Number(value);
+        return Number(valueColumn) >= Number(value);
       default:
-        return planet[column] !== value;
+        return valueColumn !== value;
       }
     });
 
@@ -74,6 +75,9 @@ function FormFilter() {
 
   return (
     <form className="row g-2 p-3">
+      <div className="col-auto">
+        <p className="col-form-label">Filtrar</p>
+      </div>
       <div className="col-auto">
         <select
           className="form-select"

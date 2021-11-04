@@ -9,12 +9,18 @@ function Table() {
   if (results.length === 0) return <p>No Planet found</p>;
 
   return (
-    <div className="table-responsive-md mt-5">
+    <div className="table-responsive-md mt-1">
       <table className="table table-dark table-hover">
         <thead>
           <tr>
             { Object.keys(results[0]).map((header) => (
-              <th scope="col" key={ header }>{header.split('_').join(' ')}</th>
+              <th
+                scope="col"
+                key={ header }
+              >
+                {header.split('_').join(' ')}
+
+              </th>
             ))}
           </tr>
         </thead>
@@ -23,10 +29,14 @@ function Table() {
             name.length === 0
               ? results.map((planet) => (
                 <tr key={ planet.name }>
-                  {Object.values(planet).map((value) => (
+                  {Object.values(planet).map((value, index) => (
                     planet.name === value
-                      ? <td data-testid="planet-name" key={ value }>{value}</td>
-                      : <td key={ value }>{value}</td>
+                      ? (
+                        <td data-testid="planet-name" key={ `${value}${index}` }>
+                          {value}
+                        </td>
+                      )
+                      : <td key={ `${value}${index}` }>{value}</td>
                   ))}
                 </tr>
               ))
@@ -34,7 +44,8 @@ function Table() {
                 .filter((input) => input.name.toLowerCase().includes(name.toLowerCase()))
                 .map((planet) => (
                   <tr key={ planet.name }>
-                    {Object.values(planet).map((value) => <td key={ value }>{value}</td>)}
+                    {Object.values(planet)
+                      .map((value, index) => <td key={ `${value}${index}` }>{value}</td>)}
                   </tr>
                 ))
           }

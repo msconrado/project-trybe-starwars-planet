@@ -6,6 +6,7 @@ import InputSearch from './components/InputSearch';
 import FormFilter from './components/FormFilter';
 import FiltersName from './components/FiltersName';
 import SelectOrder from './components/SelectOrder';
+import Btn from './components/btnNextPrev/Btn';
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
       <main>
         <FormFilter />
         <SelectOrder />
+        <FiltersName />
+        <Btn />
+        <Table />
       </main>
-      <FiltersName />
-      <Table />
     </PlanetsProvider>
   );
 }

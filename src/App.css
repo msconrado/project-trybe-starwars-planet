@@ -1,6 +1,5 @@
 .img {
-  background-image:   url('./img/planetsStarWars.png');
+  background-image: url('./img/planetsStarWars.png');
   background-size: 100%;
   color: white;
-  background-color: black;
 }
