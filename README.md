@@ -15,6 +15,10 @@ Este projeto foi feito no bloco 17 do modulo de frontend do curso de desenvolvim
 
 ---
 
+# API Utilizada
+
+- [Planet List](https://swapi-trybe.herokuapp.com/api/planets/)
+
 # Instalando Dependências
 
   * Instale as dependências:
